@@ -1,6 +1,7 @@
 from django.db import models
 
-class Contragent(models.Model):
+
+class Counterparty(models.Model):
     name = models.CharField(max_length=100, verbose_name='name')
     email = models.EmailField(verbose_name='email')
     country = models.CharField(max_length=100, verbose_name='country')
@@ -12,8 +13,8 @@ class Contragent(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Contragent'
-        verbose_name_plural = 'Contragents'
+        verbose_name = 'Counterparty'
+        verbose_name_plural = 'Counterpartys'
         ordering = ['pk']
 
 
@@ -21,16 +22,17 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='product name')
     model = models.CharField(max_length=100, verbose_name='product model')
     release_date = models.DateField(verbose_name='product release date')
-    supplier = models.ForeignKey(Contragent, on_delete=models.CASCADE, verbose_name='supplier')
+    supplier = models.ForeignKey(Counterparty, on_delete=models.CASCADE, verbose_name='supplier')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'product'
-        verbose_name_plural = 'products'
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
         ordering = ['supplier', 'pk']
+
 
 class NetworkNode(models.Model):
     NODE_TYPES = (
@@ -41,7 +43,7 @@ class NetworkNode(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='node name')
     node_type = models.CharField(max_length=22, choices=NODE_TYPES, verbose_name='node type')
-    contacts = models.OneToOneField(Contragent, on_delete=models.CASCADE, verbose_name='contacts')
+    contacts = models.OneToOneField(Counterparty, on_delete=models.CASCADE, verbose_name='contacts')
     products = models.ManyToManyField(Product, verbose_name='products')
     factory = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='supplier')
     retail_network = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)

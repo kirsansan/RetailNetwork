@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Contragent',
+            name='Counterparty',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100, verbose_name='name')),
@@ -37,7 +37,7 @@ class Migration(migrations.Migration):
                 ('model', models.CharField(max_length=100, verbose_name='product model')),
                 ('release_date', models.DateField(verbose_name='product release date')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.contragent', verbose_name='supplier')),
+                ('supplier', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='base.Counterparty', verbose_name='supplier')),
             ],
             options={
                 'verbose_name': 'product',
@@ -52,7 +52,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=100, verbose_name='node name')),
                 ('node_type', models.CharField(choices=[('Factory', 'Factory'), ('RetailNetwork', 'Retail Network'), ('IndividualEntrepreneur', 'Individual Entrepreneur')], max_length=22, verbose_name='node type')),
                 ('debt', models.DecimalField(decimal_places=2, max_digits=10, verbose_name='debt node-to-node')),
-                ('contacts', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='base.contragent', verbose_name='contacts')),
+                ('contacts', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='base.Counterparty', verbose_name='contacts')),
                 ('factory', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='supplier', to='base.networknode')),
                 ('products', models.ManyToManyField(to='base.product', verbose_name='products')),
                 ('retail_network', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='base.networknode')),
