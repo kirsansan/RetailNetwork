@@ -41,22 +41,22 @@ class NodesListAdmin(admin.ModelAdmin):
 
     # Кастомное поле
     def supplier(self, obj):
-        if obj.retail_network is not None:
-            return obj.retail_network
+        if obj.retail_network_link is not None:
+            return obj.retail_network_link
         else:
-            return obj.factory
+            return obj.factory_link
 
     supplier.short_description = 'Supplier'
 
     def supplier_link(self, obj):
-        if obj.retail_network:
+        if obj.retail_network_link:
             # return u'<a href="{0}">{1}</a>'.format(reverse('admin:base_Counterparty_change', args=(obj.contacts.pk,)), obj.contacts)
-            url = (reverse("admin:base_networknode_change", args=(obj.retail_network.pk,)))
-            return format_html('<a href="{}">{}</a>', url, obj.retail_network)
+            url = (reverse("admin:base_networknode_change", args=(obj.retail_network_link.pk,)))
+            return format_html('<a href="{}">{}</a>', url, obj.retail_network_link)
         else:
-            if obj.factory:
-                url = (reverse("admin:base_networknode_change", args=(obj.factory.pk,)))
-                return format_html('<a href="{}">{}</a>', url, obj.factory)
+            if obj.factory_link:
+                url = (reverse("admin:base_networknode_change", args=(obj.factory_link.pk,)))
+                return format_html('<a href="{}">{}</a>', url, obj.factory_link)
             else:
                 return "Factories have no links"
 

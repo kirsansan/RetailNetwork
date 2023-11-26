@@ -44,3 +44,10 @@ else:
     DB_HOST = os.getenv('POSTGRES_HOST')
 
 LOG_FILE_NAME = "retailnetwork_log.log"
+
+
+MAX_NODE_PER_PAGE = 10
+
+HIERARCHY_MODE = True
+# in this mode only Factory-type node might be available as Supplier for RetailNetwork node
+# and only RetailNetwork-type node might be available as Supplier for IndividualEntrepreneur

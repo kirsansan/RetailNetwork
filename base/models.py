@@ -43,10 +43,10 @@ class NetworkNode(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='node name')
     node_type = models.CharField(max_length=22, choices=NODE_TYPES, verbose_name='node type')
-    contacts = models.OneToOneField(Counterparty, on_delete=models.CASCADE, verbose_name='contacts')
+    contacts = models.OneToOneField(Counterparty, on_delete=models.CASCADE, verbose_name='contacts', related_name='contacts_link')
     products = models.ManyToManyField(Product, verbose_name='products')
-    factory = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='supplier')
-    retail_network = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    factory_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='factorylink')
+    retail_network_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, verbose_name='debt node-to-node')
 
     def __str__(self):
