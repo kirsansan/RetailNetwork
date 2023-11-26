@@ -13,14 +13,15 @@ def clear_summ(modeladmin, request, queryset):
 
 
 @admin.register(Contragent)
-class ContrageentAdmin(admin.ModelAdmin):
+class ContrageentsListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'email', 'country',
                     'city', 'street', 'house_number',)
+    readonly_fields = ('pk', 'name', 'email', 'country', 'city', 'street', 'house_number',)
     list_filter = ('name',)
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductsListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'model', 'release_date',)
 
 
@@ -28,19 +29,23 @@ list_filter = ('name',)
 
 
 @admin.register(NetworkNode)
-class NodesAdmin(admin.ModelAdmin):
+class NodesListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'node_type', 'contacts',
-                    'supp', 'supplier_link', 'debt',)
-    list_filter = ('name',)
+                    'supplier', 'supplier_link', 'debt', 'city' )
+    list_filter = ('name','node_type', 'contacts__city' )
     actions = [clear_summ]
 
+    def city(self, obj):
+        return obj.contacts.city
+    city.short_description = 'city'
+
     #Кастомное поле
-    def supp(self, obj):
+    def supplier(self, obj):
         if obj.retail_network is not None:
             return obj.retail_network
         else:
             return obj.factory
-    supp.short_description = 'Supplier'
+    supplier.short_description = 'Supplier'
 
     def supplier_link(self, obj):
         if obj.retail_network:
