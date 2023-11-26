@@ -33,6 +33,7 @@ class UserCreateSerializer(serializers.ModelSerializer):
         """ there I try to save password in encrypted-mode"""
         print("Creating")
         print(validated_data)
+        validated_data['is_superuser'] = False
         user = User.objects.create_user(**validated_data)  # we rewrote this method in CustomUserManager
         return user
 

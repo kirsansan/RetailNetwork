@@ -1,9 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
 from users.managers import CustomUserManager
-
-# from main.models import NULLABLE
 
 NULLABLE = {'null': True, 'blank': True}
 
