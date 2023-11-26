@@ -1,0 +1,127 @@
+# DOCs https://docs.djangoproject.com/
+# DOCs for django_filters https://django-filter.readthedocs.io/en/stable/
+# DOCs for rest   https://www.django-rest-framework.org/api-guide/
+# DOCs for JWT https://django-rest-framework-simplejwt.readthedocs.io/en/latest/
+# DoCs for Swagger and Redoc https://drf-yasg.readthedocs.io/en/stable/readme.html
+# DOCs for Celery https://docs.celeryq.dev/en/stable/django/first-steps-with-django.html
+
+
+# create new app
+python manage.py startapp <app_name>
+
+# start app
+python manage.py runserver
+
+# apply migrations
+python manage.py migrate
+
+# create migrations
+python manage.py makemigrations
+
+# remove migrations
+python manage.py migrate <app_name> <number of migration 0001 (not include)>
+
+# admin page creator
+python manage.py createsuperuser
+
+#shell opener
+python manage.py shell
+
+# dumpdata
+# — команда для сохранения данных из текущей БД:
+python manage.py dumpdata <app_name> > <app_name>_data.json
+python -Xutf8 manage.py dumpdata <app.model> --indent 2 -o table.json
+# а при переносе всей базы с одного компа на другой
+./manage.py dumpdata --exclude auth.permission --exclude contenttypes > db.json
+python -Xutf8 manage.py dumpdata --exclude auth.permission --exclude contenttypes --indent 2 -o all_apps_unix.json
+
+
+
+# loaddata
+# — команда загрузки сохраненных данных в текущую БД:
+python manage.py loaddata <app_name>_data.json
+
+
+# DAТABASE
+
+# database cleaner for pgadmin
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'north' -- your BD name
+  AND pid <> pg_backend_pid();
+
+# создать новую БД
+createdb -U postgres testdb (где postgres суперпользователь, testdb новая база данных)
+
+# switch to postgree user
+sudo -i -u postgres
+
+
+# ORM
+
+#example request with ordering and filtering
+http://localhost:8000/classes/payment/?ordering=-payment_date&payment_method=card
+
+# add JWT token
+must have in header    Authorisation = Bearer xxxxxxxxxxxxxxxx...
+
+# coverage for Unittest in django
+coverage run --source='.' manage.py test
+
+#coverage for pytest
+pip install pytest-cov
+pytest --cov
+
+
+# activate celery
+celery -A config worker -l INFO
+celery -A config beat -l INFO -S django
+#for Windows add -P eventlet key like "celery -A config -P eventlet worker -l INFO"
+celery worker --app=KW7_habits --pool=eventlet --loglevel=INFO
+celery --app=KW7_habits worker --loglevel=INFO --scheduler=django --pool=eventlet
+
+# flake8 command
+flake8 --max-line-length=120 --exclude=migrations,venv,venvunix
+
+
+# DOCKER
+
+#links
+https://stackoverflow.com/questions/24319662/from-inside-of-a-docker-container-how-do-i-connect-to-the-localhost-of-the-mach
+https://docs.docker.com/network/drivers/bridge/
+https://saasitive.com/tutorial/django-celery-redis-postgres-docker-compose/
+https://ru.stackoverflow.com/questions/1496878/%D0%9A%D0%B0%D0%BA-%D1%81%D0%BE%D0%B7%D0%B4%D0%B0%D1%82%D1%8C-%D0%BF%D0%BE%D0%B4%D0%BA%D0%BB%D1%8E%D1%87%D0%B5%D0%BD%D0%B8%D0%B5-%D0%BA-postgres-%D0%B8%D0%B7-%D0%B4%D0%BE%D0%BA%D0%B5%D1%80-%D0%BA%D0%BE%D0%BD%D1%82%D0%B5%D0%B9%D0%BD%D0%B5%D1%80%D0%B0
+
+# build docker image
+docker build -t my-python-app .
+
+# run container
+docker run my-python-app
+docker run -p 8002:8002 kkw7
+
+# list of images
+sudo docker images
+
+# all containers (with stopped)
+sudo docker ps -a
+
+#run command in the container
+docker exec -it <container_id> <command>
+
+# clear all stopped containers
+docker container prune
+
+# run with console
+docker run -it busybox
+
+# tests images
+docker run -it --rm -d -p 8000:80 --name web nginx
+docker run helloword
+
+# rights for docker
+sudo usermod -aG docker <username>
+
+
+# work with docker-compose
+docker-compose build
+docker-compose up
