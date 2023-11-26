@@ -55,12 +55,12 @@ class NodesPlusCreateAPIView(CreateAPIView):
     serializer_class = NetworkNodeSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
 
-    def perform_create(self, serializer):
-        """save w/o debt"""
-        new_obj = serializer.save()
-        # new_habit.creator = self.request.user
-        new_obj.debt = 0.0
-        new_obj.save()
+    # def perform_create(self, serializer):
+    #     """save w/o debt"""
+    #     new_obj = serializer.save()
+    #     # new_habit.creator = self.request.user
+    #     new_obj.debt = 0.0
+    #     new_obj.save()
 
 
 

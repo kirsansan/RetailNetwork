@@ -37,6 +37,7 @@ from base.models import NetworkNode
 
 def node_create_validator(value):
     """Validate all fields in a given"""
+    print('validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaator')
     if value.get('node_type') is None:
         raise ValidationError('You must specify node_type')
     if value.get('factory_link') and value.get('retail_network_link'):  # both exist
