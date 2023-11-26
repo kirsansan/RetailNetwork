@@ -11,20 +11,22 @@ from base.serializers import NetworkNodeSerializer, NetworkNodeCreationSerialize
 
 
 class NodesPublicAPIView(ListAPIView):
-    """Nodes list-view """
+    """Nodes list-view
+    :param: country_filter = Country - you can use it as URL parameter for filtering"""
     queryset = NetworkNode.objects.all()
     serializer_class = NetworkNodeSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
     pagination_class = AllListsPaginator
 
-    # def get_queryset(self):
-    #     """ only active user have permission for view all nodes"""
-    #     user = self.request.user
-    #     if user.is_superuser or user.groups.filter(name='moderator').exists():
-    #         return Habit.objects.all()
-    #     else:
-    #         print("You are not allowed to public")
-    #         return Habit.objects.filter(is_public=True)
+    def get_queryset(self):
+        """
+        change the queryset with filter by country (if exist)
+        only active user have permission for view all nodes"""
+        custom_filter = self.request.query_params.get('country_filter')
+        queryset = NetworkNode.objects.all()
+        if custom_filter is not None:
+            queryset = queryset.filter(contacts__country=custom_filter)
+        return queryset
 
 
 class NodesDetailAPIView(RetrieveAPIView):
@@ -46,13 +48,20 @@ class NodesCreateAPIView(CreateAPIView):
     serializer_class = NetworkNodeCreationSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
 
-    # def perform_create(self, serializer):
-    #     """save owner(creator) of Habit"""
-    #     new_habit = serializer.save()
-    #     new_habit.creator = self.request.user
-    #     new_habit.save()
-    #     new_log = SenderDailyLog(habit_id=new_habit, daily_status=SenderDailyLog.CREATE)
-    #     new_log.save()
+
+class NodesPlusCreateAPIView(CreateAPIView):
+    """Node create"""
+    queryset = NetworkNode.objects.all()
+    serializer_class = NetworkNodeSerializer
+    permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
+
+    def perform_create(self, serializer):
+        """save w/o debt"""
+        new_obj = serializer.save()
+        # new_habit.creator = self.request.user
+        new_obj.debt = 0.0
+        new_obj.save()
+
 
 
 class NodesUpdateAPIView(UpdateAPIView):
@@ -70,6 +79,3 @@ class CounterpartyViewSet(ModelViewSet):
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
-
-
