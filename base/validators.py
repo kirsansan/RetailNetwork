@@ -37,7 +37,6 @@ from base.models import NetworkNode
 
 def node_create_validator(value):
     """Validate all fields in a given"""
-    print('validaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaator')
     if value.get('node_type') is None:
         raise ValidationError('You must specify node_type')
     if value.get('factory_link') and value.get('retail_network_link'):  # both exist
@@ -53,3 +52,8 @@ def node_create_validator(value):
         temp_obj = NetworkNode.objects.get(pk=value.get('retail_network_link'))
         if temp_obj.node_type != 'retail_network_link':
             raise ValidationError('retail_network_link field mention to the non-retail_network object')
+
+
+def debt_api_validator(value):
+    if value.get('debt') is None or value.get('debt') != 0.0:
+        raise ValidationError("You mustn't specify non-zero debt through API")

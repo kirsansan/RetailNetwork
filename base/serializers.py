@@ -2,7 +2,7 @@ from django.db import transaction
 from rest_framework import serializers
 
 from base.models import NetworkNode, Counterparty, Product
-from base.validators import node_create_validator
+from base.validators import node_create_validator, debt_api_validator
 
 
 class CounterpartySerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         model = NetworkNode
         # fields = '__all__'
         exclude = ['contacts']
-        validators = [node_create_validator]
+        validators = [node_create_validator, debt_api_validator]
         # validators = [habit_mass_validator,
         #               HabitActionTimeValidator(field='time_for_action'), ]
 
@@ -32,17 +32,8 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         debt = validated_data.pop('debt')
         contact_data = validated_data.pop('contacts')
         product_data = validated_data.pop('products')
-        # if contact_data:
-        #     new_contact = Counterparty.objects.create(**contact_data)
-        #     validated_data['contacts'] = new_contact
-        # new_node = NetworkNode.objects.create(**validated_data)
-        # # course.owner =
-        # # if product_data:
-        # #     for product in product_data:
-        # #         print(product)
-        # #         Product.objects.create(**product, course_id=course)
-        # return new_node
-        with transaction.atomic():  #
+
+        with transaction.atomic():  # many tables will be saved in one moment
             if contact_data:
                 new_contact = Counterparty.objects.create(**contact_data)
                 validated_data['contacts'] = new_contact
@@ -58,4 +49,4 @@ class NetworkNodeCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = NetworkNode
         fields = '__all__'
-        validators = [node_create_validator]
+        validators = [node_create_validator, debt_api_validator]
