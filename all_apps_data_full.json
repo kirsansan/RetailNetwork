@@ -1,0 +1,813 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2023-11-27T07:39:03.670Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "worigts@example.com                     aka LiWonU                     with tlg: Unknown_tlg",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2023-11-27T07:49:37.524Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "1",
+    "object_repr": "Boeing office",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2023-11-27T10:39:02.379Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "2",
+    "object_repr": "Airbus office",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2023-11-27T10:40:58.896Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Bombardier oddice",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2023-11-27T10:41:19.259Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Bombardier office",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2023-11-27T10:43:03.665Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "US Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2023-11-27T10:44:18.100Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "5",
+    "object_repr": "EU Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2023-11-27T10:45:47.987Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "6",
+    "object_repr": "Asia Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2023-11-27T10:46:53.902Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Little man form China",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2023-11-27T10:48:15.361Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "8",
+    "object_repr": "Pedro Gomes",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2023-11-27T10:49:39.157Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "9",
+    "object_repr": "Al am Shenil",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2023-11-27T10:50:25.086Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Boeing",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2023-11-27T10:50:53.411Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Boeing747",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2023-11-27T10:51:18.288Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "3",
+    "object_repr": "Airbus388",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2023-11-27T10:51:42.171Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "4",
+    "object_repr": "Airbus320",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2023-11-27T10:52:10.547Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "5",
+    "object_repr": "CRJ200",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2023-11-27T10:52:28.652Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "Boeing737",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Product name\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2023-11-27T11:24:07.494Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Boeing",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2023-11-27T11:24:26.109Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "2",
+    "object_repr": "Airbus",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2023-11-27T11:25:02.743Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "Bombardier",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2023-11-27T11:25:43.171Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "4",
+    "object_repr": "US Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2023-11-27T11:35:54.609Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "4",
+    "object_repr": "US Retail",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Contacts\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2023-11-27T11:37:14.387Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "5",
+    "object_repr": "Pedro",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2023-11-27T11:38:30.949Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "6",
+    "object_repr": "Al am",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2023-11-27T11:39:06.953Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "7",
+    "object_repr": "EU Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2023-11-27T11:39:54.590Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "8",
+    "object_repr": "Al am",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2023-11-27T11:40:41.091Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "9",
+    "object_repr": "Asia Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2023-11-27T11:41:29.703Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "10",
+    "object_repr": "Asia Retail",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2023-11-27T11:42:13.167Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "11",
+    "object_repr": "Little man form China",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2023-11-27T11:43:01.380Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "7",
+    "object_repr": "Little man form China",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"City\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2023-11-27T11:44:32.343Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "11",
+    "object_repr": "Little man form China",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Debt node-to-node\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2023-11-27T11:44:44.363Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "3",
+    "object_repr": "Bombardier",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Debt node-to-node\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2023-11-27T11:46:04.725Z",
+    "user": 1,
+    "content_type": 7,
+    "object_id": "9",
+    "object_repr": "Al am Shenil",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Email\"]}}]"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "jyua4fdaaaqka0imio3tq2ycdxs8gccu",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hCHzlBx6d4zkIEBqRpISrsy3l2bdKHb_977L-V5XYpfe5r9JOqsQB1-t8DxkeoG5M711nRsdZmnoDdF77Tra5P0vOzu30HhXr41ITPEnIyLEiEbGSyZPFozCGEwQqcQjgwMBIKQBK11EUlGQINuSOr9AfLHN78:1r7Vuh:mq97oBpR9ikZPXXjXAfNZIm5h8bgzBTurB3_sFiPZqY",
+    "expire_date": "2023-12-11T07:20:15.901Z"
+  }
+},
+{
+  "model": "users.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ToR40aLe9QV8sDKJENbJg0$ItNbKwa3yIKZr3PXJE+ZXBCwG8aJXpXNpmU4mNcudj8=",
+    "last_login": "2023-11-27T07:20:15.898Z",
+    "is_superuser": true,
+    "first_name": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2023-11-27T07:16:47.945Z",
+    "email": "admin@example.com",
+    "phone": null,
+    "country": null,
+    "avatar": "",
+    "last_name": null,
+    "telegram_username": null,
+    "telegram_chat_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.user",
+  "pk": 2,
+  "fields": {
+    "password": "12345",
+    "last_login": null,
+    "is_superuser": false,
+    "first_name": "U",
+    "is_staff": false,
+    "is_active": false,
+    "date_joined": "2023-11-27T07:37:42Z",
+    "email": "worigts@example.com",
+    "phone": "888",
+    "country": "China",
+    "avatar": "",
+    "last_name": "LiWonU",
+    "telegram_username": null,
+    "telegram_chat_id": null,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 1,
+  "fields": {
+    "name": "Boeing office",
+    "email": "office@boeing.com",
+    "country": "USA",
+    "city": "Chicago",
+    "street": "North Riverside Plaza",
+    "house_number": "100"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 2,
+  "fields": {
+    "name": "Airbus office",
+    "email": "office@airbus.com",
+    "country": "Netherlands",
+    "city": "Linden",
+    "street": "2st Foret",
+    "house_number": "2"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 3,
+  "fields": {
+    "name": "Bombardier office",
+    "email": "office@bombardier.com",
+    "country": "Canada",
+    "city": "Dorval",
+    "street": "Cote-Vertu Road West",
+    "house_number": "200"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 4,
+  "fields": {
+    "name": "US Retail",
+    "email": "us@retail.com",
+    "country": "USA",
+    "city": "Denver",
+    "street": "Milky way",
+    "house_number": "15"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 5,
+  "fields": {
+    "name": "EU Retail",
+    "email": "eeu@retail.com",
+    "country": "Austria",
+    "city": "Jeneve",
+    "street": "Dunkan shtrasse",
+    "house_number": "4"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 6,
+  "fields": {
+    "name": "Asia Retail",
+    "email": "as@retail.cn",
+    "country": "China",
+    "city": "Beijing",
+    "street": "ShonDu",
+    "house_number": "7"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 7,
+  "fields": {
+    "name": "Little man form China",
+    "email": "li@li.cn",
+    "country": "China",
+    "city": "Shendzhen",
+    "street": "Shri",
+    "house_number": "89"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 8,
+  "fields": {
+    "name": "Pedro Gomes",
+    "email": "gomes@pedro.me",
+    "country": "Mexico",
+    "city": "MexicoCity",
+    "street": "Publo",
+    "house_number": "3"
+  }
+},
+{
+  "model": "base.counterparty",
+  "pk": 9,
+  "fields": {
+    "name": "Al am Shenil",
+    "email": "shenil@iran.ir",
+    "country": "Iran",
+    "city": "Tegeran",
+    "street": "Burdja Halif road",
+    "house_number": "99"
+  }
+},
+{
+  "model": "base.product",
+  "pk": 1,
+  "fields": {
+    "name": "Boeing737",
+    "model": "737",
+    "release_date": "1980-12-12",
+    "created_at": "2023-11-27T10:50:25.085Z"
+  }
+},
+{
+  "model": "base.product",
+  "pk": 2,
+  "fields": {
+    "name": "Boeing747",
+    "model": "747",
+    "release_date": "1976-06-15",
+    "created_at": "2023-11-27T10:50:53.410Z"
+  }
+},
+{
+  "model": "base.product",
+  "pk": 3,
+  "fields": {
+    "name": "Airbus388",
+    "model": "388",
+    "release_date": "1990-06-20",
+    "created_at": "2023-11-27T10:51:18.287Z"
+  }
+},
+{
+  "model": "base.product",
+  "pk": 4,
+  "fields": {
+    "name": "Airbus320",
+    "model": "320",
+    "release_date": "2000-11-11",
+    "created_at": "2023-11-27T10:51:42.170Z"
+  }
+},
+{
+  "model": "base.product",
+  "pk": 5,
+  "fields": {
+    "name": "CRJ200",
+    "model": "200",
+    "release_date": "2015-09-09",
+    "created_at": "2023-11-27T10:52:10.546Z"
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 1,
+  "fields": {
+    "name": "Boeing",
+    "node_type": "Factory",
+    "contacts": 1,
+    "factory_link": null,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 2,
+  "fields": {
+    "name": "Airbus",
+    "node_type": "Factory",
+    "contacts": 2,
+    "factory_link": null,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 3,
+  "fields": {
+    "name": "Bombardier",
+    "node_type": "Factory",
+    "contacts": 3,
+    "factory_link": null,
+    "retail_network_link": null,
+    "debt": "1500.00",
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 4,
+  "fields": {
+    "name": "US Retail",
+    "node_type": "RetailNetwork",
+    "contacts": 4,
+    "factory_link": 1,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      2
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 5,
+  "fields": {
+    "name": "Pedro",
+    "node_type": "IndividualEntrepreneur",
+    "contacts": 8,
+    "factory_link": null,
+    "retail_network_link": 4,
+    "debt": "0.00",
+    "products": [
+      2
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 6,
+  "fields": {
+    "name": "Al am",
+    "node_type": "IndividualEntrepreneur",
+    "contacts": 9,
+    "factory_link": 1,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      2
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 7,
+  "fields": {
+    "name": "EU Retail",
+    "node_type": "RetailNetwork",
+    "contacts": 5,
+    "factory_link": 2,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 8,
+  "fields": {
+    "name": "Al am",
+    "node_type": "IndividualEntrepreneur",
+    "contacts": 9,
+    "factory_link": null,
+    "retail_network_link": 7,
+    "debt": "0.00",
+    "products": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 9,
+  "fields": {
+    "name": "Asia Retail",
+    "node_type": "RetailNetwork",
+    "contacts": 6,
+    "factory_link": 3,
+    "retail_network_link": null,
+    "debt": "0.00",
+    "products": [
+      5
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 10,
+  "fields": {
+    "name": "Asia Retail",
+    "node_type": "RetailNetwork",
+    "contacts": 6,
+    "factory_link": null,
+    "retail_network_link": 7,
+    "debt": "0.00",
+    "products": [
+      3,
+      4
+    ]
+  }
+},
+{
+  "model": "base.networknode",
+  "pk": 11,
+  "fields": {
+    "name": "Little man form China",
+    "node_type": "IndividualEntrepreneur",
+    "contacts": 7,
+    "factory_link": null,
+    "retail_network_link": 9,
+    "debt": "100.01",
+    "products": [
+      3,
+      4,
+      5
+    ]
+  }
+}
+]

@@ -35,7 +35,9 @@ class NodesListAdmin(admin.ModelAdmin):
     actions = [clear_summ]
 
     def city(self, obj):
-        return obj.contacts.city
+        if obj.contacts:
+            return obj.contacts.city
+        return None
 
     city.short_description = 'city'
 

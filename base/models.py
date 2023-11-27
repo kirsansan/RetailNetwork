@@ -1,5 +1,7 @@
 from django.db import models
 
+from base.validators_model import validate_complex_case
+
 
 class Counterparty(models.Model):
     name = models.CharField(max_length=100, verbose_name='name')
@@ -22,7 +24,7 @@ class Product(models.Model):
     name = models.CharField(max_length=100, verbose_name='product name')
     model = models.CharField(max_length=100, verbose_name='product model')
     release_date = models.DateField(verbose_name='product release date')
-    supplier = models.ForeignKey(Counterparty, on_delete=models.CASCADE, verbose_name='supplier')
+    # supplier = models.ForeignKey(Counterparty, on_delete=models.CASCADE, verbose_name='supplier')
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -31,7 +33,7 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
-        ordering = ['supplier', 'pk']
+        ordering = ['pk']
 
 
 class NetworkNode(models.Model):
@@ -43,7 +45,8 @@ class NetworkNode(models.Model):
 
     name = models.CharField(max_length=100, verbose_name='node name')
     node_type = models.CharField(max_length=22, choices=NODE_TYPES, verbose_name='node type')
-    contacts = models.OneToOneField(Counterparty, on_delete=models.CASCADE, verbose_name='contacts', related_name='contacts_link')
+    contacts = models.ForeignKey(Counterparty, on_delete=models.SET_NULL, null=True, blank=True,
+                                 verbose_name='contacts', related_name='contacts_link')
     products = models.ManyToManyField(Product, verbose_name='products')
     factory_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='factorylink')
     retail_network_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
@@ -56,6 +59,9 @@ class NetworkNode(models.Model):
         verbose_name = 'node'
         verbose_name_plural = 'nodes'
         ordering = ['pk']
+
+    def clean(self):
+        validate_complex_case(self)
 
     # @property
     # def supp(self):
