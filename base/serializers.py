@@ -23,11 +23,8 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = NetworkNode
-        # fields = '__all__'
         exclude = ['contacts']
         validators = [node_create_validator, debt_api_validator, check_same_contact]
-        # validators = [habit_mass_validator,
-        #               HabitActionTimeValidator(field='time_for_action'), ]
 
     def create(self, validated_data):
         debt = validated_data.pop('debt')
