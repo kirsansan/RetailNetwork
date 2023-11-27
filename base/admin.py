@@ -41,16 +41,17 @@ class NodesListAdmin(admin.ModelAdmin):
 
     city.short_description = 'city'
 
-    # Кастомное поле
+    # Custom field
     def supplier(self, obj):
+        """custom field for find local supplier"""
         if obj.retail_network_link is not None:
             return obj.retail_network_link
         else:
             return obj.factory_link
-
     supplier.short_description = 'Supplier'
 
     def supplier_link(self, obj):
+        """custom field for create local supplier href"""
         if obj.retail_network_link:
             # return u'<a href="{0}">{1}</a>'.format(reverse('admin:base_Counterparty_change', args=(obj.contacts.pk,)), obj.contacts)
             url = (reverse("admin:base_networknode_change", args=(obj.retail_network_link.pk,)))
@@ -61,6 +62,15 @@ class NodesListAdmin(admin.ModelAdmin):
                 return format_html('<a href="{}">{}</a>', url, obj.factory_link)
             else:
                 return "Factories have no links"
+
+    # def deep_hierarchy_supplier(self, obj):
+    #     """deep supplier finding"""
+    #     if obj.retail_network_link is not None:
+    #         return obj.retail_network_link
+    #     else:
+    #         return obj.factory_link
+    #
+    #     deep_hierarchy_supplier.short_description = 'Hierarchy Supplier'
 
 #     list_filter = ('creator', 'contacts.city', )
 
