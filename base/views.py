@@ -50,7 +50,7 @@ class NodesCreateAPIView(CreateAPIView):
 
 
 class NodesPlusCreateAPIView(CreateAPIView):
-    """Node create"""
+    """Node create with adding new address at the sme time"""
     queryset = NetworkNode.objects.all()
     serializer_class = NetworkNodeSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
@@ -72,10 +72,14 @@ class NodesUpdateAPIView(UpdateAPIView):
 
 
 class CounterpartyViewSet(ModelViewSet):
+    """CRUD for Contacts"""
     queryset = Counterparty.objects.all()
     serializer_class = CounterpartySerializer
+    permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
 
 
 class ProductViewSet(ModelViewSet):
+    """CRUD for Products"""
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
