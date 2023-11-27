@@ -15,7 +15,7 @@ def clear_summ(modeladmin, request, queryset):
 class CounterpartyListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'email', 'country',
                     'city', 'street', 'house_number',)
-    readonly_fields = ('pk', 'name', 'email', 'country', 'city', 'street', 'house_number',)
+    # readonly_fields = ('pk', 'name', 'email', 'country', 'city', 'street', 'house_number',)
     list_filter = ('name',)
 
 
