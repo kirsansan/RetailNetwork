@@ -1,5 +1,6 @@
 from django.db import transaction
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
 
 from base.models import NetworkNode, Counterparty, Product
 from base.validators import node_create_validator, debt_api_validator
@@ -30,13 +31,18 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         debt = validated_data.pop('debt')
-        contact_data = validated_data.pop('contacts')
+        new_contact_data = validated_data.pop('contacts')
         product_data = validated_data.pop('products')
 
         with transaction.atomic():  # many tables will be saved in one moment
-            if contact_data:
-                new_contact = Counterparty.objects.create(**contact_data)
-                validated_data['contacts'] = new_contact
+            if new_contact_data:
+                same_contact = Counterparty.objects.filter(name=new_contact_data['name']).order_by('pk').all()
+                if len(same_contact) > 0:
+                    raise ValidationError('You must specify unique contacts')
+                    validated_data['contacts'] = same_contact[0]
+                else:
+                    new_contact = Counterparty.objects.create(**new_contact_data)
+                    validated_data['contacts'] = new_contact
 
             new_node = NetworkNode.objects.create(debt=0.0, **validated_data)
 
