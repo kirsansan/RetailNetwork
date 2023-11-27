@@ -2,7 +2,7 @@ from datetime import time
 
 from rest_framework.exceptions import ValidationError
 
-from base.models import NetworkNode
+from base.models import NetworkNode, Counterparty
 
 
 # class HabitActionTimeValidator:
@@ -57,3 +57,8 @@ def node_create_validator(value):
 def debt_api_validator(value):
     if value.get('debt') is None or value.get('debt') != 0.0:
         raise ValidationError("You mustn't specify non-zero debt through API")
+
+def check_same_contact(value):
+    same_contact = Counterparty.objects.filter(name=value.get('contacts')['name']).order_by('pk').all()
+    if len(same_contact) > 0:
+        raise ValidationError('Same contact has already exist. You must specify unique contacts')

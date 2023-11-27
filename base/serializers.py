@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from base.models import NetworkNode, Counterparty, Product
-from base.validators import node_create_validator, debt_api_validator
+from base.validators import node_create_validator, debt_api_validator, check_same_contact
 
 
 class CounterpartySerializer(serializers.ModelSerializer):
@@ -25,7 +25,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         model = NetworkNode
         # fields = '__all__'
         exclude = ['contacts']
-        validators = [node_create_validator, debt_api_validator]
+        validators = [node_create_validator, debt_api_validator, check_same_contact]
         # validators = [habit_mass_validator,
         #               HabitActionTimeValidator(field='time_for_action'), ]
 
@@ -35,14 +35,9 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         product_data = validated_data.pop('products')
 
         with transaction.atomic():  # many tables will be saved in one moment
-            if new_contact_data:
-                same_contact = Counterparty.objects.filter(name=new_contact_data['name']).order_by('pk').all()
-                if len(same_contact) > 0:
-                    raise ValidationError('You must specify unique contacts')
-                    validated_data['contacts'] = same_contact[0]
-                else:
-                    new_contact = Counterparty.objects.create(**new_contact_data)
-                    validated_data['contacts'] = new_contact
+            if new_contact_data:    # WE HAVE TO use check_same_contact validator before
+                new_contact = Counterparty.objects.create(**new_contact_data)
+                validated_data['contacts'] = new_contact
 
             new_node = NetworkNode.objects.create(debt=0.0, **validated_data)
 
