@@ -4,12 +4,14 @@ from config.config import HIERARCHY_MODE
 
 def validate_complex_case(instance):
     if instance.node_type != 0:  # non factory
-
         # check links and their types
         if instance.supplier_link is not None:
             if instance.supplier_link.node_type > instance.node_type:
-                message = "YYou cannot reference a node with a higher hierarchy level"
+                message = "You cannot reference a node with a higher hierarchy level"
                 raise ValidationError({'__all__': [message]})
+        else:
+            message = "You must reference to supplier"
+            raise ValidationError({'__all__': [message]})
         # Hard checking if HIERARCHY_MODE
         if HIERARCHY_MODE:
             pass
