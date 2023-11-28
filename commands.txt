@@ -71,6 +71,7 @@ coverage run --source='.' manage.py test
 #coverage for pytest
 pip install pytest-cov
 pytest --cov
+pytest --cov --cov-report=html
 
 
 # activate celery
