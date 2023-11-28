@@ -39,19 +39,18 @@ def node_create_validator(value):
     """Validate all fields in a given"""
     if value.get('node_type') is None:
         raise ValidationError('You must specify node_type')
-    if value.get('factory_link') and value.get('retail_network_link'):  # both exist
-        raise ValidationError('You must specify only one mention - factory_link or retail_network_link')
-    # if value.get('factory_link') and value.get('retail_network_link'):  # both exist
-    #     raise ValidationError('You must specify only one mention - factory_link or retail_network_link')
 
-    if value.get('factory_link'):
-        temp_obj = NetworkNode.objects.get(pk=value.get('factory_link'))
-        if temp_obj.node_type != 'Factory':
-            raise ValidationError('Factory field mention to the non-factory object')
-    if value.get('retail_network_link'):
-        temp_obj = NetworkNode.objects.get(pk=value.get('retail_network_link'))
-        if temp_obj.node_type != 'retail_network_link':
-            raise ValidationError('retail_network_link field mention to the non-retail_network object')
+
+    ref:int = value.get('supplier_link')
+
+    if value.get('node_type') == 0 and ref is not None:
+        raise ValidationError("Factory can't have reference")
+
+    if ref > 0:  # non-factory
+        temp_obj = NetworkNode.objects.get(pk=ref)
+        if temp_obj.node_type > value.get('node_type'):
+            raise ValidationError('You cannot reference a node with a higher hierarchy level')
+
 
 
 def debt_api_validator(value):
