@@ -30,7 +30,7 @@ list_filter = ('name',)
 @admin.register(NetworkNode)
 class NodesListAdmin(admin.ModelAdmin):
     list_display = ('pk', 'name', 'node_type', 'contacts',
-                    'supplier', 'supplier_link', 'debt', 'city')
+                    'supplier_ref', 'debt', 'city')
     list_filter = ('name', 'node_type', 'contacts__city')
     actions = [clear_summ]
 
@@ -42,25 +42,26 @@ class NodesListAdmin(admin.ModelAdmin):
     city.short_description = 'city'
 
     # Custom field
-    def supplier(self, obj):
-        """custom field for find local supplier"""
-        if obj.retail_network_link is not None:
-            return obj.retail_network_link
-        else:
-            return obj.factory_link
-    supplier.short_description = 'Supplier'
+    # def supplier(self, obj):
+    #     """custom field for find local supplier"""
+    #     if obj.retail_network_link is not None:
+    #         return obj.retail_network_link
+    #     else:
+    #         return obj.factory_link
+    # supplier.short_description = 'Supplier'
 
-    def supplier_link(self, obj):
+    @staticmethod
+    def supplier_ref(obj):
         """custom field for create local supplier href"""
-        if obj.retail_network_link:
+        if obj.supplier_link:
             # return u'<a href="{0}">{1}</a>'.format(reverse('admin:base_Counterparty_change', args=(obj.contacts.pk,)), obj.contacts)
-            url = (reverse("admin:base_networknode_change", args=(obj.retail_network_link.pk,)))
-            return format_html('<a href="{}">{}</a>', url, obj.retail_network_link)
+            url = (reverse("admin:base_networknode_change", args=(obj.supplier_link.pk,)))
+            return format_html('<a href="{}">{}</a>', url, obj.supplier_link)
         else:
-            if obj.factory_link:
-                url = (reverse("admin:base_networknode_change", args=(obj.factory_link.pk,)))
-                return format_html('<a href="{}">{}</a>', url, obj.factory_link)
-            else:
+            if obj.node_type == 0:  # factory
+                #     url = (reverse("admin:base_networknode_change", args=(obj.factory_link.pk,)))
+                #     return format_html('<a href="{}">{}</a>', url, obj.factory_link)
+                # else:
                 return "Factories have no links"
 
     # def deep_hierarchy_supplier(self, obj):

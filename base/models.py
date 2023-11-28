@@ -38,18 +38,19 @@ class Product(models.Model):
 
 class NetworkNode(models.Model):
     NODE_TYPES = (
-        ('Factory', 'Factory'),
-        ('RetailNetwork', 'Retail Network'),
-        ('IndividualEntrepreneur', 'Individual Entrepreneur'),
+        (0, 'Factories'),
+        (1, 'Retail Networks'),
+        (2, 'Individual Entrepreneurs'),
     )
 
     name = models.CharField(max_length=100, verbose_name='node name')
-    node_type = models.CharField(max_length=22, choices=NODE_TYPES, verbose_name='node type')
+    node_type = models.IntegerField(choices=NODE_TYPES, verbose_name='node type')
     contacts = models.ForeignKey(Counterparty, on_delete=models.SET_NULL, null=True, blank=True,
                                  verbose_name='contacts', related_name='contacts_link')
     products = models.ManyToManyField(Product, verbose_name='products')
-    factory_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='factorylink')
-    retail_network_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+#    factory_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='factorylink')
+#    retail_network_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
+    supplier_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='supplink')
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, verbose_name='debt node-to-node')
 
     def __str__(self):
@@ -60,8 +61,8 @@ class NetworkNode(models.Model):
         verbose_name_plural = 'nodes'
         ordering = ['pk']
 
-    def clean(self):
-        validate_complex_case(self)
+    # def clean(self):
+    #     validate_complex_case(self)
 
     # @property
     # def supp(self):

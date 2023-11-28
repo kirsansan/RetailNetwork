@@ -429,6 +429,58 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2023-11-28T14:55:49.251Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "4",
+    "object_repr": "US Retail",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Supplier link\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2023-11-28T14:56:00.074Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "6",
+    "object_repr": "Al am",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Supplier link\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2023-11-28T14:56:12.917Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "7",
+    "object_repr": "EU Retail",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Supplier link\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2023-11-28T14:56:21.437Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "9",
+    "object_repr": "Asia Retail",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Supplier link\"]}}]"
+  }
+},
+{
   "model": "sessions.session",
   "pk": "jyua4fdaaaqka0imio3tq2ycdxs8gccu",
   "fields": {
@@ -689,7 +741,7 @@
     "name": "US Retail",
     "node_type": 1,
     "contacts": 4,
-    "supplier_link": null,
+    "supplier_link": 1,
     "debt": "0.00",
     "products": [
       2
@@ -717,7 +769,7 @@
     "name": "Al am",
     "node_type": 2,
     "contacts": 9,
-    "supplier_link": null,
+    "supplier_link": 1,
     "debt": "0.00",
     "products": [
       2
@@ -731,7 +783,7 @@
     "name": "EU Retail",
     "node_type": 1,
     "contacts": 5,
-    "supplier_link": null,
+    "supplier_link": 2,
     "debt": "0.00",
     "products": [
       3,
@@ -761,7 +813,7 @@
     "name": "Asia Retail",
     "node_type": 1,
     "contacts": 6,
-    "supplier_link": null,
+    "supplier_link": 3,
     "debt": "0.00",
     "products": [
       5
