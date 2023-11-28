@@ -61,8 +61,8 @@ class NetworkNode(models.Model):
         verbose_name_plural = 'nodes'
         ordering = ['pk']
 
-    # def clean(self):
-    #     validate_complex_case(self)
+    def clean(self):
+        validate_complex_case(self)
 
     # @property
     # def supp(self):
