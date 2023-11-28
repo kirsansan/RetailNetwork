@@ -1,7 +1,7 @@
 import pytest
 from pytest_factoryboy import register
 from rest_framework.test import APIClient
-from tests.factories import UserFactory
+from tests.factories import UserFactory, ProductFactory, CounterpartyFactory, NetworkNodeFactory
 
 # Factories
 
@@ -64,6 +64,20 @@ def authenticated_user():
     return {'client': client, 'user': user, 'password': password}
 
 
+@pytest.fixture
+@pytest.mark.django_db
+def non_active_user():
+    user = UserFactory.create()
+    password = user.password
+    user.set_password(password)
+    user.is_active = False
+    user.save()
+    # create_instances_for_user(user)
+    client = APIClient()
+    # client.login(email=user.email, password=password)
+    client.force_authenticate(user=user)
+    return {'client': client, 'user': user, 'password': password}
+
 # @pytest.fixture
 # def base_habit():
 #     new_data = {"title": "TITLE",
@@ -83,7 +97,20 @@ def authenticated_user():
 #     # Вызывает db.reset_db() перед каждым тестом
 #     db.reset_db()
 
-# @pytest.fixture
-# def random_habit():
-#     habit = HabitFactory()
-#     return habit
+@pytest.fixture
+def random_product():
+    pr = ProductFactory()
+    return pr
+
+
+@pytest.fixture
+def random_contact():
+    ct = CounterpartyFactory()
+    return ct
+
+
+
+@pytest.fixture
+def node_f_maker():
+    f = NetworkNodeFactory()
+    return f
