@@ -40,17 +40,18 @@ def node_create_validator(value):
     if value.get('node_type') is None:
         raise ValidationError('You must specify node_type')
 
+    ref: NetworkNode = value.get('supplier_link')
 
-    ref:int = value.get('supplier_link')
-
-    if value.get('node_type') == 0 and ref is not None:
-        raise ValidationError("Factory can't have reference")
-
-    if ref > 0:  # non-factory
-        temp_obj = NetworkNode.objects.get(pk=ref)
-        if temp_obj.node_type > value.get('node_type'):
-            raise ValidationError('You cannot reference a node with a higher hierarchy level')
-
+    if ref is not None:
+        if value.get('node_type') == 0:
+            raise ValidationError("Factory can't have reference")
+        else:  # non-factory
+            # temp_obj = NetworkNode.objects.get(pk=ref)
+            if ref.node_type > value.get('node_type'):
+                raise ValidationError('You cannot reference a node with a higher hierarchy level')
+    else:
+        if value.get('node_type') == 0:
+            raise ValidationError("Non Factory object must have a reference")
 
 
 def debt_api_validator(value):
@@ -58,9 +59,9 @@ def debt_api_validator(value):
         raise ValidationError("You mustn't specify non-zero debt through API")
 
 
-def check_same_contact(value):
-    same_contact = Counterparty.objects.filter(name=value.get('contacts')['name']).order_by('pk').all()
-    if len(same_contact) > 0:
-        raise ValidationError('Same contact has already exist. You must specify unique contacts')
+# def check_same_contact(value):
+#     same_contact = Counterparty.objects.filter(name=value.get('contacts')['name']).order_by('pk').all()
+#     if len(same_contact) > 0:
+#         raise ValidationError('Same contact has already exist. You must specify unique contacts')
 
 

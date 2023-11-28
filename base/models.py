@@ -48,8 +48,6 @@ class NetworkNode(models.Model):
     contacts = models.ForeignKey(Counterparty, on_delete=models.SET_NULL, null=True, blank=True,
                                  verbose_name='contacts', related_name='contacts_link')
     products = models.ManyToManyField(Product, verbose_name='products')
-#    factory_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='factorylink')
-#    retail_network_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True)
     supplier_link = models.ForeignKey('self', on_delete=models.SET_NULL, null=True, blank=True, related_name='supplink')
     debt = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, verbose_name='debt node-to-node')
 
@@ -61,12 +59,10 @@ class NetworkNode(models.Model):
         verbose_name_plural = 'nodes'
         ordering = ['pk']
 
-    def clean(self):
-        validate_complex_case(self)
+    # Below is the first way to protect the model changing from the Admin panel
+    # I quite like it,
+    # however current time I am using save_form() method in admin.py with standard validators
 
-    # @property
-    # def supp(self):
-    #     if self.retail_network is not None:
-    #         return self.retail_network
-    #     else:
-    #         return self.supplier
+    # def clean(self):
+    #     validate_complex_case(self)
+

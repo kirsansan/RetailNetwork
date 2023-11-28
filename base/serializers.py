@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from base.models import NetworkNode, Counterparty, Product
-from base.validators import node_create_validator, debt_api_validator, check_same_contact
+from base.validators import node_create_validator, debt_api_validator
 
 
 class CounterpartySerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = NetworkNode
         exclude = ['contacts']
-        validators = [node_create_validator, debt_api_validator, check_same_contact]
+        validators = [node_create_validator, debt_api_validator]
 
     def create(self, validated_data):
         debt = validated_data.pop('debt')
@@ -32,7 +32,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
         product_data = validated_data.pop('products')
 
         with transaction.atomic():  # many tables will be saved in one moment
-            if new_contact_data:    # WE HAVE TO use check_same_contact validator before
+            if new_contact_data:  # WE HAVE TO use check_same_contact validator before
                 new_contact = Counterparty.objects.create(**new_contact_data)
                 validated_data['contacts'] = new_contact
 
@@ -42,6 +42,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
                 # product = Product.objects.create(**product_info)
                 new_node.products.add(product_info)  # add products in ManyToMany
         return new_node
+
 
 class NetworkNodeCreationSerializer(serializers.ModelSerializer):
     class Meta:
