@@ -1,0 +1,23 @@
+{% extends 'face/base.html' %}
+
+{% block content %}
+    <div class="col-lg-10">
+        <div class="content">
+            <h1 class="card-title text-center mt-5">Main page</h1>
+            <h3 class="card-title text-center mt-1">Welcome to our Retail Selling service</h3>
+            <div class="links text-center">
+                <a href="{% url 'admin:index' %}" class="btn btn-primary" >Admin panel</a>
+                <a href="{% url 'schema-swagger-ui' %}" class="btn btn-secondary" >Swagger documentation</a>
+                <a href="{% url 'schema-redoc' %}" class="btn btn-secondary" >Redoc documentation</a>
+            </div>
+        </div>
+        <div class="b-example-divider"></div>
+        <div class="container">
+            <div class="card-footer py-3 my-4">
+                <footer class="py-3 my-4">
+                    <b class="text-right text-body-secondary">&copy; 2023 {{ title }}</b>
+                </footer>
+            </div>
+        </div>
+    </div>
+{% endblock %}
