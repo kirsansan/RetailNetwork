@@ -21,6 +21,17 @@ def test_get_nodes_list(authenticated_user):
     assert len(response.data['results']) == MAX_NODE_PER_PAGE
 
 
+#todo:  searching by country need
+@pytest.mark.django_db
+def test_get_nodes_list_with_sorting(authenticated_user):
+    auth_client = authenticated_user.get('client')
+    # NetworkNodeFactory.create()
+    [NetworkNodeFactory.create_batch(MAX_NODE_PER_PAGE) for _ in range(0, 7)]
+    response = auth_client.get('/nodes/all/')
+    assert response.status_code == 200
+    assert len(response.data['results']) == MAX_NODE_PER_PAGE
+
+
 @pytest.mark.django_db
 def test_get_nodes_list_diff_users(authenticated_user, non_active_user):
     auth_client = authenticated_user.get('client')
