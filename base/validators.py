@@ -50,7 +50,7 @@ def node_create_validator(value):
             if ref.node_type > value.get('node_type'):
                 raise ValidationError('You cannot reference a node with a higher hierarchy level')
     else:
-        if value.get('node_type') == 0:
+        if value.get('node_type') != 0:
             raise ValidationError("Non Factory object must have a reference")
 
 

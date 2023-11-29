@@ -67,7 +67,7 @@ class NodesPlusCreateAPIView(CreateAPIView):
 class NodesUpdateAPIView(UpdateAPIView):
     """Node update"""
     queryset = NetworkNode.objects.all()
-    serializer_class = NetworkNodeSerializer
+    serializer_class = NetworkNodeCreationSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
 
 

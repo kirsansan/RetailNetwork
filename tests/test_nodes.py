@@ -118,15 +118,38 @@ def test_get_nodes_list_diff_users(authenticated_user, non_active_user):
 #     assert response.data == expected_response
 #
 #
-# @pytest.mark.django_db
-# def test_delete_habit(authenticated_user):
-#     auth_client = authenticated_user.get('client')
-#     auth_user = authenticated_user.get('user')
-#     habit = HabitFactory(creator=auth_user)
-#
-#     response = auth_client.delete(f'/habit/delete/{habit.pk}/')
-#     assert response.status_code == 204
-#
-#     # Check that the habit was deleted from the database
-#     with pytest.raises(Habit.DoesNotExist):
-#         habit.refresh_from_db()
+@pytest.mark.django_db
+def test_update_node(authenticated_user, random_product):
+    auth_client = authenticated_user.get('client')
+    node: NetworkNode = NetworkNodeFactory()
+
+    response = auth_client.get(f'/nodes/detail/{node.pk}/')
+    assert response.status_code == 200
+    new_data = {
+              "name": "NEWstring",
+              "node_type": node.node_type,
+              "debt": node.debt,
+              "contacts": node.contacts.pk,
+              "supplier_link": node.supplier_link,
+              "products": [random_product.pk]
+            }
+    response = auth_client.put(f'/nodes/update/{node.pk}/', data=new_data, format='json')
+    assert response.status_code == 200
+    node.refresh_from_db()
+    assert node.name == 'NEWstring'
+
+
+
+@pytest.mark.django_db
+def test_delete_node(authenticated_user):
+    auth_client = authenticated_user.get('client')
+    node = NetworkNodeFactory()
+
+    response = auth_client.get(f'/nodes/detail/{node.pk}/')
+    assert response.status_code == 200
+    response = auth_client.delete(f'/nodes/delete/{node.pk}/')
+    assert response.status_code == 204
+
+    # Check that the node was deleted from the database
+    with pytest.raises(NetworkNode.DoesNotExist):
+        node.refresh_from_db()
