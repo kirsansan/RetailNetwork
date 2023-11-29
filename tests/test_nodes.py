@@ -1,14 +1,9 @@
-import json
 from collections import OrderedDict
-from json import loads, dumps
-
 import pytest
-
-from base.serializers import CounterpartySerializer, ProductSerializer
+from base.serializers import CounterpartySerializer
 from config.config import MAX_NODE_PER_PAGE
 from base.models import NetworkNode
 from tests.factories import NetworkNodeFactory
-from users.models import User
 
 
 @pytest.mark.django_db
@@ -21,7 +16,7 @@ def test_get_nodes_list(authenticated_user):
     assert len(response.data['results']) == MAX_NODE_PER_PAGE
 
 
-#todo:  searching by country need
+# todo:  searching by country need
 @pytest.mark.django_db
 def test_get_nodes_list_with_sorting(authenticated_user):
     auth_client = authenticated_user.get('client')
@@ -36,7 +31,7 @@ def test_get_nodes_list_with_sorting(authenticated_user):
 def test_get_nodes_list_diff_users(authenticated_user, non_active_user):
     auth_client = authenticated_user.get('client')
     non_active_client = non_active_user.get('client')
-    nodes = NetworkNodeFactory.create_batch(2)  # two default
+    NetworkNodeFactory.create_batch(2)  # two default
 
     # we will see 2 objects  - both nodes for active
     response = auth_client.get('/nodes/all/')
