@@ -1,4 +1,5 @@
 import json
+from collections import OrderedDict
 from json import loads, dumps
 
 import pytest
@@ -102,11 +103,6 @@ def test_create_node(authenticated_user, random_product, random_contact):
 def test_create_plus_node(authenticated_user, random_product, random_contact):
     auth_client = authenticated_user.get('client')
     tmp_node = NetworkNodeFactory()
-    # cont_serializer_obj = CounterpartySerializer()
-    # prod_serializer_obj = ProductSerializer()
-    # contact = cont_serializer_obj.to_representation(random_contact)
-    # product = prod_serializer_obj.to_representation(random_product)
-
     new_data = {
         "name": "Emirates airlines",
         "node_type": 1,
@@ -114,18 +110,18 @@ def test_create_plus_node(authenticated_user, random_product, random_contact):
         "supplier_link": tmp_node.pk,
         "products": [random_product.pk, ],
         "contact_set": {
-                    "name": "Airbus office",
-                    "email": "office@airbus.com",
-                    "country": "Netherlands",
-                    "city": "Linden",
-                    "street": "3th Builders street",
-                    "house_number": "22"
-                    }
+            "name": "Airbus office",
+            "email": "office@airbus.com",
+            "country": "Netherlands",
+            "city": "Linden",
+            "street": "3th Builders street",
+            "house_number": "22"
+        }
     }
     response = auth_client.post('/nodes/create_plus/', new_data, format='json')
     assert response.status_code == 201
     response.data.pop('id')
-    resp_contact = response.data.pop('contact_set')
+    resp_contact: OrderedDict = response.data.pop('contact_set')
     resp_prod = response.data.pop('products')
 
     expected_response_wo_contact_products = {
@@ -134,13 +130,12 @@ def test_create_plus_node(authenticated_user, random_product, random_contact):
         "debt": '0.00',
         "supplier_link": tmp_node.pk,
     }
-
-    print("RC=", resp_contact)
-    # print("P=", product)
-
     assert response.data == expected_response_wo_contact_products
     assert resp_prod == [random_product.pk]
-
+    assert resp_contact['name'] == "Airbus office"
+    assert resp_contact['email'] == "office@airbus.com"
+    assert resp_contact['country'] == "Netherlands"
+    assert resp_contact['city'] == "Linden"
 
 
 @pytest.mark.django_db
