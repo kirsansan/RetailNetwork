@@ -1,4 +1,9 @@
+import json
+from json import loads, dumps
+
 import pytest
+
+from base.serializers import CounterpartySerializer, ProductSerializer
 from config.config import MAX_NODE_PER_PAGE
 from base.models import NetworkNode
 from tests.factories import NetworkNodeFactory
@@ -32,92 +37,112 @@ def test_get_nodes_list_diff_users(authenticated_user, non_active_user):
     # assert len(response.data['results']) == 2
 
 
-#
-# @pytest.mark.django_db
-# def test_get_habit_list_as_creator(authenticated_user):
-#     auth_client = authenticated_user.get('client')
-#     auth_user: User = authenticated_user.get('user')
-#     habits = HabitFactory.create_batch(2)  # two default
-#     for habit in habits:  # make both habits like as we are a creator of them
-#         habit.creator = auth_user
-#         habit.is_public = False
-#         habit.save()
-#
-#     # we will not be able to see anything - all habits are not public
-#     response = auth_client.get('/habit/all/')
-#     assert response.status_code == 200
-#     assert len(response.data['results']) == 0
-#
-#     # we will see 2 objects  - both habits have 'creator' with our mentions
-#     response = auth_client.get('/habit/my/')
-#     assert response.status_code == 200
-#     assert len(response.data['results']) == 2
-#
-#
-# @pytest.mark.django_db
-# def test_get_habit_detail(authenticated_user):
-#     auth_client = authenticated_user.get('client')
-#     auth_user = authenticated_user.get('user')
-#     habits: list[Habit] = HabitFactory.create_batch(3)  # two default
-#     tmp_habit = habits[0]
-#
-#     # check someone else's habit (not mine)
-#     response = auth_client.get(f'/habit/detail/{tmp_habit.pk}/')
-#     assert response.status_code == 403
-#     assert str(response.data['detail']) == "У вас недостаточно прав для выполнения данного действия."
-#
-#     # make this habit mine
-#     tmp_habit.creator = auth_user
-#     tmp_habit.save()
-#     response = auth_client.get(f'/habit/detail/{tmp_habit.pk}/')
-#     expected_response = {'id': tmp_habit.pk,
-#                          'title': tmp_habit.title,
-#                          'place': tmp_habit.place,
-#                          'time': tmp_habit.time,
-#                          'action': tmp_habit.action,
-#                          'is_useful': tmp_habit.is_useful,
-#                          'frequency': tmp_habit.frequency,
-#                          'reward': tmp_habit.reward,
-#                          'time_for_action': str(tmp_habit.time_for_action),
-#                          'is_public': tmp_habit.is_public,
-#                          'creator': tmp_habit.creator.pk,
-#                          'associated_habit': tmp_habit.associated_habit}
-#     assert response.status_code == 200
-#     assert response.data == expected_response
-#
-#
-# @pytest.mark.django_db
-# def test_create_habit(authenticated_user):
-#     auth_client = authenticated_user.get('client')
-#     auth_user = authenticated_user.get('user')
-#
-#     new_data = {"title": "push up",
-#                 "place": "home_sweet_home",
-#                 "time": "14:52:00",
-#                 "action": "jazz up",
-#                 "associated_habit": None,
-#                 "time_for_action": "0:1:25",
-#                 "frequency": 3,
-#                 "is_useful": False}
-#     response = auth_client.post('/habit/create/', new_data, format='json')
-#     assert response.status_code == 201
-#     response.data.pop('id')
-#     expected_response = {
-#         "title": "push up",
-#         "place": "home_sweet_home",
-#         "time": "14:52:00",
-#         "action": "jazz up",
-#         "is_useful": False,
-#         "associated_habit": None,
-#         "time_for_action": "00:01:25",
-#         "frequency": 3,
-#         "reward": None,
-#         "is_public": True,
-#         "creator": auth_user.pk
-#     }
-#     assert response.data == expected_response
-#
-#
+@pytest.mark.django_db
+def test_get_node_detail(authenticated_user):
+    auth_client = authenticated_user.get('client')
+    nodes: list[NetworkNode] = NetworkNodeFactory.create_batch(2)  # two default
+    node = nodes[0]
+    serializer_obj = CounterpartySerializer()
+    contact = serializer_obj.to_representation(node.contacts)
+
+    # make new response
+    response = auth_client.get(f'/nodes/detail/{node.pk}/')
+    expected_response_wo_contact = {
+        "id": node.pk,
+        "name": node.name,
+        "node_type": node.node_type,
+        "debt": '0.00',
+        "supplier_link": node.supplier_link,
+        "products": []
+    }
+    assert response.status_code == 200
+    resp_contact = response.data.pop('contact_set')
+
+    assert response.data == expected_response_wo_contact
+    assert resp_contact == contact
+
+
+@pytest.mark.django_db
+def test_create_node(authenticated_user, random_product, random_contact):
+    auth_client = authenticated_user.get('client')
+    tmp_node = NetworkNodeFactory()
+    # cont_serializer_obj = CounterpartySerializer()
+    # prod_serializer_obj = ProductSerializer()
+    # contact = cont_serializer_obj.to_representation(random_contact)
+    # product = prod_serializer_obj.to_representation(random_product)
+
+    new_data = {
+        "name": "Emirates airlines",
+        "node_type": 1,
+        "debt": '0',
+        "supplier_link": tmp_node.pk,
+        "contacts": random_contact.pk,
+        "products": [random_product.pk, ]
+    }
+    response = auth_client.post('/nodes/create/', new_data, format='json')
+    assert response.status_code == 201
+    response.data.pop('id')
+    expected_response_wo_products = {
+        "name": "Emirates airlines",
+        "node_type": 1,
+        "debt": '0.00',
+        "supplier_link": tmp_node.pk,
+        "contacts": random_contact.pk,
+    }
+    # resp_contact = response.data.pop('contacts')
+    resp_prod = response.data.pop('products')
+    # print("RP=", resp_prod)
+    # print("P=", product)
+
+    assert response.data == expected_response_wo_products
+    assert resp_prod == [random_product.pk]
+
+
+@pytest.mark.django_db
+def test_create_plus_node(authenticated_user, random_product, random_contact):
+    auth_client = authenticated_user.get('client')
+    tmp_node = NetworkNodeFactory()
+    # cont_serializer_obj = CounterpartySerializer()
+    # prod_serializer_obj = ProductSerializer()
+    # contact = cont_serializer_obj.to_representation(random_contact)
+    # product = prod_serializer_obj.to_representation(random_product)
+
+    new_data = {
+        "name": "Emirates airlines",
+        "node_type": 1,
+        "debt": '0.00',
+        "supplier_link": tmp_node.pk,
+        "products": [random_product.pk, ],
+        "contact_set": {
+                    "name": "Airbus office",
+                    "email": "office@airbus.com",
+                    "country": "Netherlands",
+                    "city": "Linden",
+                    "street": "3th Builders street",
+                    "house_number": "22"
+                    }
+    }
+    response = auth_client.post('/nodes/create_plus/', new_data, format='json')
+    assert response.status_code == 201
+    response.data.pop('id')
+    resp_contact = response.data.pop('contact_set')
+    resp_prod = response.data.pop('products')
+
+    expected_response_wo_contact_products = {
+        "name": "Emirates airlines",
+        "node_type": 1,
+        "debt": '0.00',
+        "supplier_link": tmp_node.pk,
+    }
+
+    print("RC=", resp_contact)
+    # print("P=", product)
+
+    assert response.data == expected_response_wo_contact_products
+    assert resp_prod == [random_product.pk]
+
+
+
 @pytest.mark.django_db
 def test_update_node(authenticated_user, random_product):
     auth_client = authenticated_user.get('client')
@@ -126,18 +151,17 @@ def test_update_node(authenticated_user, random_product):
     response = auth_client.get(f'/nodes/detail/{node.pk}/')
     assert response.status_code == 200
     new_data = {
-              "name": "NEWstring",
-              "node_type": node.node_type,
-              "debt": node.debt,
-              "contacts": node.contacts.pk,
-              "supplier_link": node.supplier_link,
-              "products": [random_product.pk]
-            }
+        "name": "NEWstring",
+        "node_type": node.node_type,
+        "debt": node.debt,
+        "contacts": node.contacts.pk,
+        "supplier_link": node.supplier_link,
+        "products": [random_product.pk]
+    }
     response = auth_client.put(f'/nodes/update/{node.pk}/', data=new_data, format='json')
     assert response.status_code == 200
     node.refresh_from_db()
     assert node.name == 'NEWstring'
-
 
 
 @pytest.mark.django_db
