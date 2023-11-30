@@ -10,21 +10,34 @@ from tests.factories import NetworkNodeFactory
 def test_get_nodes_list(authenticated_user):
     auth_client = authenticated_user.get('client')
     # NetworkNodeFactory.create()
-    [NetworkNodeFactory.create_batch(MAX_NODE_PER_PAGE) for _ in range(0, 7)]
+    [NetworkNodeFactory.create_batch(2 * MAX_NODE_PER_PAGE + 1)]
     response = auth_client.get('/nodes/all/')
     assert response.status_code == 200
     assert len(response.data['results']) == MAX_NODE_PER_PAGE
+    response = auth_client.get('/nodes/all/?page=2')
+    assert response.status_code == 200
+    assert len(response.data['results']) == MAX_NODE_PER_PAGE
+    response = auth_client.get('/nodes/all/?page=3')
+    assert response.status_code == 200
+    assert len(response.data['results']) == 1
 
 
-# todo:  searching by country need
 @pytest.mark.django_db
 def test_get_nodes_list_with_sorting(authenticated_user):
     auth_client = authenticated_user.get('client')
     # NetworkNodeFactory.create()
-    [NetworkNodeFactory.create_batch(MAX_NODE_PER_PAGE) for _ in range(0, 7)]
-    response = auth_client.get('/nodes/all/')
+    nodelist: list[NetworkNode] = NetworkNodeFactory.create_batch(MAX_NODE_PER_PAGE+25)
+    strange_country: str = "No Known Country"
+    nodelist[3].contacts.country = strange_country
+    nodelist[3].contacts.save()
+    nodelist[5].contacts.country = strange_country
+    nodelist[5].contacts.save()
+    response = auth_client.get(f'/nodes/all/')
     assert response.status_code == 200
     assert len(response.data['results']) == MAX_NODE_PER_PAGE
+    response = auth_client.get(f'/nodes/all/?country_filter={strange_country}')
+    assert response.status_code == 200
+    assert len(response.data['results']) == 2
 
 
 @pytest.mark.django_db

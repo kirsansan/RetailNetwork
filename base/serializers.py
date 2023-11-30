@@ -3,7 +3,7 @@ from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from base.models import NetworkNode, Counterparty, Product
-from base.validators import node_create_validator, debt_api_validator
+from base.validators import node_create_validator, debt_api_create_validator, debt_api_update_validator
 
 
 class CounterpartySerializer(serializers.ModelSerializer):
@@ -24,7 +24,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
     class Meta:
         model = NetworkNode
         exclude = ['contacts']
-        validators = [node_create_validator, debt_api_validator]
+        validators = [node_create_validator, debt_api_create_validator]
 
     def create(self, validated_data):
         debt = validated_data.pop('debt')
@@ -48,4 +48,11 @@ class NetworkNodeCreationSerializer(serializers.ModelSerializer):
     class Meta:
         model = NetworkNode
         fields = '__all__'
-        validators = [node_create_validator, debt_api_validator]
+        validators = [node_create_validator, debt_api_create_validator]
+
+
+class NetworkNodeUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NetworkNode
+        exclude = ['debt']
+        validators = [node_create_validator, debt_api_update_validator]

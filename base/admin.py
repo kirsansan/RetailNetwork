@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.html import format_html
 
 from base.models import NetworkNode, Counterparty, Product
-from base.validators import node_create_validator, debt_api_validator
+from base.validators import node_create_validator
 
 
 @admin.action(description="Clear debt")
@@ -61,7 +61,7 @@ class NodesListAdmin(admin.ModelAdmin):
 
     def save_form(self, request, form, change):
         """ Validate the form before saving """
-        validators = [node_create_validator, debt_api_validator]
+        validators = [node_create_validator]
         for validator in validators:
             validator(form.cleaned_data)
         return form.save(commit=False)

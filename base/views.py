@@ -7,7 +7,7 @@ from base.models import NetworkNode, Counterparty, Product
 from base.paginators import AllListsPaginator
 from base.permissions import IsActive, IsAdministrator
 from base.serializers import NetworkNodeSerializer, NetworkNodeCreationSerializer, CounterpartySerializer, \
-    ProductSerializer
+    ProductSerializer, NetworkNodeUpdateSerializer
 
 
 class NodesPublicAPIView(ListAPIView):
@@ -67,7 +67,7 @@ class NodesPlusCreateAPIView(CreateAPIView):
 class NodesUpdateAPIView(UpdateAPIView):
     """Node update"""
     queryset = NetworkNode.objects.all()
-    serializer_class = NetworkNodeCreationSerializer
+    serializer_class = NetworkNodeUpdateSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
 
 
