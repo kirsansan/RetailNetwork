@@ -1,15 +1,9 @@
-from datetime import time
-
 from rest_framework.exceptions import ValidationError
-
-from base.models import NetworkNode, Counterparty
+from base.models import NetworkNode
 
 
 def node_create_validator(value):
     """Validate all fields in a given"""
-    # it will check in Model level
-    # if value.get('node_type') is None:
-    #     raise ValidationError('You must specify node_type')
 
     ref: NetworkNode = value.get('supplier_link')
 
@@ -17,7 +11,6 @@ def node_create_validator(value):
         if value.get('node_type') == 0:
             raise ValidationError('Factory cannot have reference')
         else:  # non-factory
-            # temp_obj = NetworkNode.objects.get(pk=ref)
             if ref.node_type > value.get('node_type'):
                 raise ValidationError('You cannot reference a node with a higher hierarchy level')
     else:

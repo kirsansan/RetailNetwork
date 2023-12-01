@@ -40,7 +40,6 @@ class NodesListAdmin(admin.ModelAdmin):
 
     city.short_description = 'city_'
 
-
     # def supplier(self, obj):
     #     """Custom field supplier without creating a href link"""
     #     if obj.retail_network_link is not None:
@@ -57,6 +56,7 @@ class NodesListAdmin(admin.ModelAdmin):
         else:
             if obj.node_type == 0:  # factory
                 return "Factories have no links"
+
     supplier_ref.short_description = 'Supplier Reference'
 
     def save_form(self, request, form, change):

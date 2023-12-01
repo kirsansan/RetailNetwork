@@ -72,29 +72,14 @@ def non_active_user():
     user.set_password(password)
     user.is_active = False
     user.save()
-    # create_instances_for_user(user)
     client = APIClient()
-    # client.login(email=user.email, password=password)
     client.force_authenticate(user=user)
     return {'client': client, 'user': user, 'password': password}
-
-# @pytest.fixture
-# def base_habit():
-#     new_data = {"title": "TITLE",
-#                 "place": "home_sweet_home",
-#                 "time": "12:52:00",
-#                 "action": "swim to the test",
-#                 "associated_habit": None,
-#                 "time_for_action": "0:01:14",
-#                 "frequency": 3,
-#                 "is_useful": False,
-#                 "is_public": False}
-#     return new_data
 
 
 # @pytest.fixture(autouse=True)
 # def reset_db_before_test():
-#     # Вызывает db.reset_db() перед каждым тестом
+#     # Call db.reset_db() before each test
 #     db.reset_db()
 
 @pytest.fixture
@@ -107,7 +92,6 @@ def random_product():
 def random_contact():
     ct = CounterpartyFactory()
     return ct
-
 
 
 @pytest.fixture

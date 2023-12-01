@@ -1,7 +1,5 @@
 from django.db import models
 
-from base.validators_model import validate_complex_case
-
 
 class Counterparty(models.Model):
     name = models.CharField(max_length=100, verbose_name='name')
@@ -65,4 +63,3 @@ class NetworkNode(models.Model):
 
     # def clean(self):
     #     validate_complex_case(self)
-

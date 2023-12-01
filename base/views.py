@@ -1,8 +1,6 @@
-from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, DestroyAPIView, CreateAPIView, UpdateAPIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ModelViewSet
-
 from base.models import NetworkNode, Counterparty, Product
 from base.paginators import AllListsPaginator
 from base.permissions import IsActive, IsAdministrator
@@ -54,14 +52,6 @@ class NodesPlusCreateAPIView(CreateAPIView):
     queryset = NetworkNode.objects.all()
     serializer_class = NetworkNodeSerializer
     permission_classes = [IsAuthenticated, IsActive | IsAdministrator]
-
-    # def perform_create(self, serializer):
-    #     """save w/o debt"""
-    #     new_obj = serializer.save()
-    #     # new_habit.creator = self.request.user
-    #     new_obj.debt = 0.0
-    #     new_obj.save()
-
 
 
 class NodesUpdateAPIView(UpdateAPIView):

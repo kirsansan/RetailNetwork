@@ -103,9 +103,8 @@ DATABASES = {
     }
 }
 
-if ENV_TYPE == 'local' or ENV_TYPE == 'external': # else - will not be determinate
+if ENV_TYPE == 'local' or ENV_TYPE == 'external':  # else - will not be determinate
     DATABASES['default']['PASSWORD'] = DB_PASSWORD
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

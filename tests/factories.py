@@ -1,14 +1,7 @@
-import random
-
-import pytest
 from factory import Faker, SubFactory, post_generation
 from factory.django import DjangoModelFactory
-
-
 from base.models import Product, Counterparty, NetworkNode
 from users.models import User
-
-from datetime import time
 
 
 class UserFactory(DjangoModelFactory):
@@ -32,6 +25,7 @@ class ProductFactory(DjangoModelFactory):
     model = Faker('word')
     created_at = Faker('date_time')
 
+
 class CounterpartyFactory(DjangoModelFactory):
     class Meta:
         model = Counterparty
@@ -49,10 +43,8 @@ class NetworkNodeFactory(DjangoModelFactory):
         model = NetworkNode
 
     name = Faker('word')
-    #node_type = Faker('pyint', min_value=0, max_value=2)
     node_type = 0
     contacts = SubFactory(CounterpartyFactory)
-    # products = (SubFactory(ProductFactory),)
     supplier_link = None
     debt = 0.0
 
@@ -62,14 +54,3 @@ class NetworkNodeFactory(DjangoModelFactory):
             # Simple build, do nothing.
             return
         self.products.add(*extracted)
-
-
-    # time_for_action = time(00, random.randint(0, 1), random.randint(0, 59))
-    # creator = SubFactory(UserFactory)
-    #
-    # city = Faker('city')
-    # release_date = Faker('date')
-    # model = Faker('word')
-    # frequency = Faker('pyint', min_value=1, max_value=7)
-    # is_public = True
-    # is_useful = True

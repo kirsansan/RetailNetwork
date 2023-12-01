@@ -32,7 +32,7 @@ def test_get_nodes_list_with_sorting(authenticated_user):
     nodelist[3].contacts.save()
     nodelist[5].contacts.country = strange_country
     nodelist[5].contacts.save()
-    response = auth_client.get(f'/nodes/all/')
+    response = auth_client.get('/nodes/all/')
     assert response.status_code == 200
     assert len(response.data['results']) == MAX_NODE_PER_PAGE
     response = auth_client.get(f'/nodes/all/?country_filter={strange_country}')
