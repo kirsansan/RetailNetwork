@@ -30,10 +30,10 @@ Creation time (filled in automatically upon creation).
 <h3>What does this project do.</h3>
 
 this project realise a service for handling selling network with API interface.
-pls find additional information in file "comments.pdf" (comments.docx)
+pls find additional information in file <h4>comments.pdf (comments.docx)</h4> 
 
 
-writen by kirill.s (aka Mr.K) 2023.
+This app was writen by kirill.s (aka Mr.K) in 2023.
 
 
 <h3>How to prepare.</h3>
