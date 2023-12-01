@@ -30,7 +30,7 @@ Creation time (filled in automatically upon creation).
 <h3>What does this project do.</h3>
 
 this project realise a service for handling selling network with API interface.
-pls find additional information in file "description.md"
+pls find additional information in file "comments.pdf" (comments.docx)
 
 
 writen by kirill.s (aka Mr.K) 2023.
@@ -102,29 +102,10 @@ POST {
     }
 - add access token as Bearer for your next requests
 
-[//]: # (- create your first habit http://localhost:8000/habit/create/ . For instance: )
-
-[//]: # (POST {)
-
-[//]: # (    "title": "my first habit",)
-
-[//]: # (    "place": "home sweet home",)
-
-[//]: # (    "time": "12:52:00",)
-
-[//]: # (    "action": "jazz up before lunch",)
-
-[//]: # (    "time_for_action": "0:01:30",)
-
-[//]: # (    "frequency": 5,)
-
-[//]: # (    "is_useful": false)
-
-[//]: # (} )
 
 
 if you want to test this product with little database which already have some data you be able to tap 
-> python manage.py loaddata all_apps_unix.json
+> python manage.py loaddata all_apps_full.json
 
 Testing
 
