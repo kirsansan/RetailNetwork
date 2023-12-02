@@ -1,4 +1,6 @@
-<h2>Main idea</h2>
+<h2>Retail Network API service</h2>
+
+<h3>Main idea</h3>
 
 Retail Network API service
 
@@ -72,22 +74,23 @@ Next step helps you create superuser user. With this user login you will be able
 
 or
 > python manage.py create_su
-
-Be sure that you have started redis server. Congratulation, we ready for start!
+ 
+Congratulation, we are ready to start!
 
 <h3>Ноw it works.</h3>
 
 Start the server with
 >python manage.py runserver
 
-you will find API documentation from front-end connecting  
-http://127.0.0.1:8000/swagger/ or 
-http://127.0.0.1:8000/redoc/
+you will find API documentation for front-end connecting  
+http://YOUR_HOST/swagger/ or 
+http://YOUR_HOST/redoc/
 use it with any browser what you like
 
 
-Easy way for a work start:
-- create new user: http://localhost:8000/users/
+Easy way for a work start in localhost:
+- create new user: 
+- http://localhost:8000/users/
 POST {
         "email": "your@e.mail",
         "password": "your_password",
@@ -95,7 +98,8 @@ POST {
         "telegram_username": "your_telegram_name"
     }
 NOTE: your_telegram_name must be created in telegram app settings 
-- take a token via http://localhost:8000/users/token/ 
+- take a token via 
+- http://localhost:8000/users/token/ 
 POST {
         "email": "your@e.mail",
         "password": "your_password"
@@ -103,14 +107,40 @@ POST {
 - add access token as Bearer for your next requests
 
 
+- create a new Node
 
-if you want to test this product with little database which already have some data you be able to tap 
+http://127.0.0.1:8000/nodes/create/
+POST{
+    "name": "Korean Retail",
+    "node_type": 2,
+    "contacts": 6, 
+    "products": [3],
+    "supplier_link": 5
+}
+
+-  view all nodes
+
+http://127.0.0.1:8000/nodes/all/
+GET
+
+- view one node detail
+
+http://127.0.0.1:8000/nodes/detail/<id>
+DELETE
+
+-etc  
+
+
+
+
+
+if you want to test this app with little database which already have some data you be able to tap 
 > python manage.py loaddata all_apps_full.json
 
 Testing
 
 To run the tests, ensure that you have pytest installed in your virtual environment. If you don't have it, you can install it using: pip install pytest pytest-django
-Next, navigate to the root directory of your project and execute: pytest
+Next, navigate to the root directory of your project and execute: <b>pytest</b>
 
 
 For create docker image use:
@@ -127,5 +157,6 @@ docker-compose up
 
 
 
-Have a nice day! See you!
+That's all
+<h4>Have a nice day! See you! </h4>
 with best wishes, kirill.s
