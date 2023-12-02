@@ -27,6 +27,7 @@ class NetworkNodeSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         new_contact_data = validated_data.pop('contacts')
         product_data = validated_data.pop('products')
+        validated_data.pop('debt')
 
         with transaction.atomic():  # many tables will be saved in one moment
             if new_contact_data:  # WE HAVE TO use check_same_contact validator before
